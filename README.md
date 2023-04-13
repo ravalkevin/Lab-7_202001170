@@ -33,5 +33,306 @@ Based on these equivalence classes, we can design the following test cases:
 | 0, 5, 2009|
 | 15, 13, 2005 |
 | 31, 6, 1899 |
+| 1, 1, 1900 |
 | 31, 12, 2018 |
+
+## **Boundary Value Analysis:**<br>
+
+1) The earliest possible date: (1, 1, 1900)
+2) The latest possible date: (31, 12, 2015)
+3) The earliest day of each month: (1, 1, 2000), (1, 2, 2000), (1, 3, 2000),..., (1, 12, 2000)
+4) The latest day of each month: (31, 1, 2000), (28, 2, 2000), (31, 3, 2000),..., (31, 12, 2000)
+5) Leap year day: (29, 2, 2000)
+6) Invalid leap year day: (29, 2, 1900)
+7) One day before earliest date: (31, 12, 1899)
+8) One day after latest date: (1, 1, 2016)<br>
+
+Now, we can design the following test cases:<br>
+Tester Action and Input Data Expected Outcome<br>
+
+**Boundary Test Cases:**<br>
+
+| Input | Output |
+| ------------- | :---: |
+| 29, 2, 1900 | Invalid |
+| 1, 1, 1900 | Invalid |
+| 31, 12, 2015 | 30, 12, 2015 |
+| 1, 1, 2000 | 31, 12, 1999 |
+| 31, 1, 2000 | 30, 1, 2000 |
+| 29, 2, 2000 | 28, 2, 2000 |
+<br>
+
+## Program 1:
+The function linearSearch searches for a value v in an array of integers a. <br>
+If v appears in the array a, then the function returns the first index i, such that a[i] == v; otherwise, -1 is returned.<br>
+```cpp
+int linearSearch(int v, int a[])
+{
+  int i = 0;
+  while (i < a.lenght())
+  {
+    if (a[i] == v){
+      return i;
+    }
+    i++;
+  }
+  return -1;
+}
+```
+**Equivalence Partitioning:**
+ 
+| Tester Action and Input Data     | Expected Outcome      |
+| ------------- | :---: |
+| v is present in a        | Index of v         |
+| v is not present in a         | -1         |
+
+**Boundary Value Analysis:**
+
+| Tester Action and Input Data     | Expected Outcome      |
+| ------------- | :---: |
+| Empty array a        | -1         |
+| v is present at the last index of a length of a        | -1         |
+| v is present at the first index of a         | 0         |
+| v is not present in a         | -1         |
+<br>
+
+## Program 2:
+The function countItem returns the number of times a value v appears in an array of integers a.<br>
+```cpp
+int countItem(int v, int a[])
+{
+  int count = 0;
+  for (int i = 0; i < a.length; i++)
+  {
+    if (a[i] == v)
+    count++;
+  }
+return (count);
+}
+```
+**Equivalence Partitioning:**
+
+| Tester Action and Input Data     | Expected Outcome      |
+| ------------- | :---: |
+| v is present in a        | Number of times v appears in a         |
+| v is not present in a         | 0         |
+
+**Boundary Value Analysis:**
+
+| Tester Action and Input Data     | Expected Outcome      |
+| ------------- | :---: |
+| Empty array a        | 0         |
+| v is not present in a         | 0        |
+| v is present once in a         | 1         |
+| v is present multiple times in a        | Number of times v appears in a         |
+| v is present at the first index of a         | 1         |
+| v is present at the last index of a        | 1        |
+
+<br>
+
+## Program 3:
+The function binarySearch searches for a value v in an ordered array of integers a. <br>
+If v appears in the array a, then the function returns an index i, such that a[i] == v; otherwise, -1 is returned.<br>
+Assumption: the elements in the array a are sorted in non-decreasing order.<br>
+```cpp
+int binarySearch(int v, int a[])
+{
+  int lo,mid,hi;
+  lo = 0;
+  hi = a.length-1;
+  while (lo <= hi)
+  {
+    mid = (lo+hi)/2;
+    if (v == a[mid])
+      return (mid);
+    else if (v < a[mid])
+      hi = mid-1;
+    else
+      lo = mid+1;
+  }
+  return(-1);
+}
+```
+
+**Equivalence Partitioning:**
+
+| Tester Action and Input Data     | Expected Outcome      |
+| ------------- | :---: |
+| v is present in a        | Index of v         |
+| v is not present in a         | -1         |
+
+**Boundary Value Analysis:**
+
+| Tester Action and Input Data     | Expected Outcome      |
+| ------------- | :---: |
+| Empty array a        | -1         |
+| v is present at the first index of a         | 0         |
+| v is present at the last index of a length of a        | -1         |
+| v is not present in a         | -1         |
+
+<br>
+
+## Program 4:
+P4. The following problem has been adapted from The Art of Software Testing, by G. Myers (1979). <br>
+The function triangle takes three integer parameters that are interpreted as the lengths of the sides of a triangle. <br>
+It returns whether the triangle is equilateral (three lengths equal), isosceles (two lengths equal), scalene (no lengths equal), or invalid (impossible lengths).<br>
+
+```cpp
+final int EQUILATERAL = 0;
+final int ISOSCELES = 1;
+final int SCALENE = 2;
+final int INVALID = 3;
+int triangle(int a, int b, int c)
+{
+  if (a >= b+c || b >= a+c || c >= a+b)
+    return(INVALID);
+  if (a == b && b == c)
+    return(EQUILATERAL);
+  if (a == b || a == c || b == c)
+    return(ISOSCELES);
+   return(SCALENE);
+}
+```
+
+**Equivalence Partitioning:**
+
+| Tester Action and Input Data     | Expected Outcome      |
+| ------------- | :---: |
+| Invalid triangle (a+b<=c)        | INVALID         |
+| Valid equilateral triangle (a=b=c)         | EQUILATERAL         |
+| Valid isosceles triangle (a=b<c)        | ISOSCELES         |
+| Valid scalene triangle (a<b<c)         | SCALENE         |
+
+**Boundary Value Analysis:**
+
+| Tester Action and Input Data     | Expected Outcome      |
+| ------------- | :---: |
+| Invalid triangle (a+b<=c)        | INVALID         |
+| Invalid triangle (a+c<b)         | INVALID         |
+| Invalid triangle (b+c<a)        | INVALID         |
+| Valid equilateral triangle (a=b=c)         | EQUILATERAL         |
+| Valid isosceles triangle (a=b<c)        | ISOSCELES         |
+| Valid isosceles triangle (a=c<b)        | ISOSCELES         |
+| Valid isosceles triangle (b=c<a)        | ISOSCELES         |
+| Valid scalene triangle (a<b<c)         | SCALENE         |
+
+<br>
+
+## Program 5:
+The function prefix (String s1, String s2) returns whether or not the string s1 is a prefix of string s2 (you may assume that neither s1 nor s2 is null).<br>
+```cpp
+public static boolean prefix(String s1, String s2)
+{
+  if (s1.length() > s2.length())
+  {
+    return false;
+  }
+  for (int i = 0; i < s1.length(); i++)
+  {
+    if (s1.charAt(i) != s2.charAt(i))
+    {
+      return false;
+    }
+  }
+  return true;
+}
+```
+
+**Equivalence Partitioning:**
+
+| Tester Action and Input Data     | Expected Outcome      |
+| ------------- | :---: |
+| Non-empty s1 is not a prefix of s2         | False         |
+| Non-empty s1 is longer than s2         | False         |
+| Empty string s1 and s2        | True         |
+| Empty string s1 and non-empty s2         | True         |
+| Non-empty s1 is a prefix of non-empty s2        | True         |
+
+**Boundary Value Analysis:**
+
+| Tester Action and Input Data     | Expected Outcome      |
+| ------------- | :---: |
+| Empty string s1 and s2        | True         |
+| Empty string s1 and non-empty s2         | True         |
+| Non-empty s1 is not a prefix of s2         | False         |
+| Non-empty s1 is longer than s2         | False         |
+<br>
+
+## Program 6:
+Consider again the triangle classification program (P4) with a slightly different specification: <br>
+The program reads floating values from the standard input. The three values A, B, and C are interpreted as representing the lengths of the sides of a triangle. <br>
+The program then prints a message to the standard output that states whether the triangle, if it can be formed, is scalene, isosceles, equilateral, or right angled.<br>
+Determine the following for the above program:<br>
+<br>
+
+**1) Identify the equivalence classes for the system<br>**
+
+Equivalence Classes:<br>
+EC1: All sides are positive, real numbers.<br>
+EC2: One or more sides are negative or zero.<br>
+EC3: The sum of the lengths of any two sides is less than or equal to the length of the remaining side (impossible lengths).<br>
+EC4: The sum of the lengths of any two sides is greater than the length of the remaining side (possible lengths).<br>
+
+<br>
+
+**2) Identify test cases to cover the identified equivalence classes. Also, explicitly mention which test case would cover which equivalence class.<br>**
+(Hint: you must need to be ensure that the identified set of test cases cover all identified equivalence classes)<br>
+
+Test cases:<br>
+TC1 (EC1): A=3, B=4, C=5 (right-angled triangle)<br>
+TC2 (EC1): A=5, B=5, C=5 (equilateral triangle)<br>
+TC3 (EC1): A=5, B=6, C=7 (scalene triangle)<br>
+TC4 (EC1): A=5, B=5, C=7 (isosceles triangle)<br>
+TC5 (EC2): A=-2, B=4, C=5 (invalid input)<br>
+TC6 (EC2): A=0, B=4, C=5 (invalid input)<br>
+
+<br>
+
+
+**3) For the boundary condition A + B > C case (scalene triangle), identify test cases to verify the boundary.<br>**
+
+Test cases for the boundary condition A + B > C:<br>
+TC7 (EC4): A=2, B=3, C=6 (sum of A and B is equal to C)<br>
+
+<br>
+
+
+**4) For the boundary condition A = C case (isosceles triangle), identify test cases to verify the boundary.<br>**
+
+Test cases for the boundary condition A = C:<br>
+TC8 (EC4): A=5, B=6, C=5 (A equals to C)<br>
+
+<br>
+
+**5) For the boundary condition A = B = C case (equilateral triangle), identify test cases to verify the boundary.<br>**
+
+Test cases for the boundary condition A = B = C:<br>
+TC9 (EC4): A=1, B=1, C=1 (all sides are equal)<br>
+
+<br>
+
+**6) For the boundary condition A2 + B2 = C2 case (right-angle triangle), identify test cases to verify the boundary.<br>**
+
+Test cases for the boundary condition A^2 + B^2 = C^2:<br>
+TC10 (EC4): A=3, B=4, C=5 (right-angled triangle)<br>
+
+<br>
+
+**7) For the non-triangle case, identify test cases to explore the boundary.<br>**
+
+Test cases for the non-triangle case:<br>
+TC11 (EC3): A=2, B=2, C=4 (sum of A and B is less than C)<br>
+
+<br>
+
+**8) For non-positive input, identify test points.<br>**
+
+Test points for non-positive input:<br>
+TP1 (EC2): A=0, B=4, C=5 (invalid input)<br>
+TP2 (EC2): A=-2, B=4, C=5 (invalid input)<br>
+Note: Test cases TC1 to TC10 covers all identified equivalence classes.<br>
+
+<br>
+
+
 
