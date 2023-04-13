@@ -268,10 +268,10 @@ Determine the following for the above program:<br>
 **1) Identify the equivalence classes for the system<br>**
 
 Equivalence Classes:<br>
-EC1: All sides are positive, real numbers.<br>
-EC2: One or more sides are negative or zero.<br>
-EC3: The sum of the lengths of any two sides is less than or equal to the length of the remaining side (impossible lengths).<br>
-EC4: The sum of the lengths of any two sides is greater than the length of the remaining side (possible lengths).<br>
+EC1: All sides are positive and real numbers.<br>
+EC2: There are one or more sides are negative or zero.<br>
+EC3: The sum of the lengths of any two sides is less than or equal to the length of the remaining side which is impossible lengths.<br>
+EC4: The sum of the lengths of any two sides is greater than the length of the remaining side which is possible lengths.<br>
 
 <br>
 
@@ -280,11 +280,11 @@ EC4: The sum of the lengths of any two sides is greater than the length of the r
 
 Test cases:<br>
 TC1 (EC1): A=3, B=4, C=5 (right-angled triangle)<br>
-TC2 (EC1): A=5, B=5, C=5 (equilateral triangle)<br>
+TC2 (EC1): A=3, B=3, C=3 (equilateral triangle)<br>
 TC3 (EC1): A=5, B=6, C=7 (scalene triangle)<br>
 TC4 (EC1): A=5, B=5, C=7 (isosceles triangle)<br>
-TC5 (EC2): A=-2, B=4, C=5 (invalid input)<br>
-TC6 (EC2): A=0, B=4, C=5 (invalid input)<br>
+TC5 (EC2): A=9, B=-4, C=5 (invalid input)<br>
+TC6 (EC2): A=0, B=8, C=10 (invalid input)<br>
 
 <br>
 
@@ -292,7 +292,7 @@ TC6 (EC2): A=0, B=4, C=5 (invalid input)<br>
 **3) For the boundary condition A + B > C case (scalene triangle), identify test cases to verify the boundary.<br>**
 
 Test cases for the boundary condition A + B > C:<br>
-TC7 (EC4): A=2, B=3, C=6 (sum of A and B is equal to C)<br>
+TC7 (EC4): A=2, B=3, C=6 <br>
 
 <br>
 
@@ -334,5 +334,43 @@ Note: Test cases TC1 to TC10 covers all identified equivalence classes.<br>
 
 <br>
 
+# **Section B**
+1. **Control flow diagram:**<br>
+![control-flow-diagram drawio](https://user-images.githubusercontent.com/75673068/231425222-27f0cc54-8a37-41a1-8d0f-b57b1db680a2.png)
 
+2. **Test sets:**<br>
+
+**a) Statement coverage test sets:** To achieve statement coverage, we need to make sure that every statement in the code is executed at least once.
+<br>
+* Test 1: p = empty vector
+* Test 2: p = vector with one point
+* Test 3: p = vector with two points with the same y component
+* Test 4: p = vector with two points with different y components
+* Test 5: p = vector with three or more points with different y components
+* Test 6: p = vector with three or more points with the same y component
+
+<br>
+
+**b) Branch coverage test sets:** To achieve branch coverage, we need to make sure that every possible branch in the code is taken at least once
+<br>
+* Test 1: p = empty vector
+* Test 2: p = vector with one point
+* Test 3: p = vector with two points with the same y component
+* Test 4: p = vector with two points with different y components
+* Test 5: p = vector with three or more points with different y components, and none of them have the same x component
+* Test 6: p = vector with three or more points with the same y component, and some of them have the same x component
+* Test 7: p = vector with three or more points with the same y component, and all of them have the same x component
+
+<br>
+
+**c) Basic condition coverage test sets:** To achieve basic condition coverage, we need to make sure that every basic condition in the code (i.e., every Boolean subexpression) is evaluated as both true and false at least once
+<br>
+* Test 1: p = empty vector
+* Test 2: p = vector with one point
+* Test 3: p = vector with two points with the same y component, and the first point has a smaller x component
+* Test 4: p = vector with two points with the same y component, and the second point has a smaller x component
+* Test 5: p = vector with two points with different y components
+* Test 6: p = vector with three or more points with different y components, and none of them have the same x component
+* Test 7: p = vector with three or more points with the same y component, and some of them have the same x component
+* Test 8: p = vector with three or more points with the same y component, and all of them have the same x component.
 
